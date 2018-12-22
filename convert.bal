@@ -14,9 +14,9 @@ http:Client enterpriseEndpoint = new("http://localhost:9092/exchangeEnterprise/g
 
 public function main(int amount, string currency) {
     float[] rates = collectExchangeRates(currency);
-    float min = rates.min();
+    float max = rates.max();
     
-    io:println(multiply(untaint <float>amount, min));
+    io:println(multiply(untaint <float>amount, max));
 }
 
 function fetchExchangeRate(http:Client clientEndpoint, string currency) returns json|error {

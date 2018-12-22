@@ -1,5 +1,6 @@
 import ballerina/http;
 import ballerina/log;
+import ballerinax/kubernetes;
 
 type Operand "+"|"-"|"*"|"/";
 
@@ -15,6 +16,17 @@ type Request record {
     float? rightSide;
 };
 
+@kubernetes:Deployment {
+    image: "calculator:v.1.0",
+    dockerHost: "tcp://192.168.99.100:2376", 
+    dockerCertPath: "/Users/rkovacs/.minikube/certs"
+}
+@http:ServiceConfig {
+    basePath: "/calculator"
+}
+@kubernetes:Service {
+    serviceType: "NodePort"
+}
 service calculator on new http:Listener(9090) {
 
     resource function multiply(http:Caller caller, http:Request request) {

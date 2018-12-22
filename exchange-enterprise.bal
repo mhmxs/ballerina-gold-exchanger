@@ -1,5 +1,6 @@
 import ballerina/http;
 import ballerina/log;
+import ballerinax/kubernetes;
 
 type CurrencyNotFoundError error<string>;
 
@@ -54,6 +55,17 @@ function Handler.generateResponse(http:Request request) returns @untainted json|
     return responseMap;
 }
 
+@kubernetes:Deployment {
+    image: "exchange-enterprise:v.1.0",
+    dockerHost: "tcp://192.168.99.100:2376", 
+    dockerCertPath: "/Users/rkovacs/.minikube/certs"
+}
+@http:ServiceConfig {
+    basePath: "/exchangeEnterprise"
+}
+@kubernetes:Service {
+    serviceType: "NodePort"
+}
 service exchangeEnterprise on new http:Listener(9092) {
     private Handler handler = new;
 

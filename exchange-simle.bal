@@ -1,6 +1,18 @@
 import ballerina/http;
 import ballerina/log;
+import ballerinax/kubernetes;
 
+@kubernetes:Deployment {
+    image: "exchange-simple:v.1.0",
+    dockerHost: "tcp://192.168.99.100:2376", 
+    dockerCertPath: "/Users/rkovacs/.minikube/certs"
+}
+@http:ServiceConfig {
+    basePath: "/exchangeSimple"
+}
+@kubernetes:Service {
+    serviceType: "NodePort"
+}
 service exchangeSimple on new http:Listener(9091) {
 
     resource function getRate(http:Caller caller, http:Request request) {
