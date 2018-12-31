@@ -19,7 +19,7 @@ type Exchanger object {
     function getExchangeRate(string currency) returns float|CurrencyNotFoundError {
         float[] rates = self.currencies
             .filter(function ((string, float) pair) returns boolean {
-                var (key, value) = pair;
+                var (key, _) = pair;
                 return key == currency;
             })
             .map(function ((string, float) pair) returns float {
