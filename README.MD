@@ -1,7 +1,7 @@
 This project aims to demonstrate language features and power of Ballerina language.
 
 The example contains 3 microservices and a CLI tool to interact with the services.
-The CLI tool "calculates" best gold currency ratio, and exchanges tha amount of gold to currency. The services are running in minikube by default.
+The CLI tool "calculates" best gold currency ratio, and exchanges the amount of gold to the given currency. The services are running in minikube by default.
 
 Operations are the following:
  * CLI tool downloads the ratio from two different services parallely
