@@ -6,7 +6,7 @@ The CLI tool "calculates" best gold currency ratio, and exchanges the amount of 
 Operations are the following:
  * CLI tool downloads the ratio from two different services parallel
  * Finds best price
- * Call calculator service to exchange
+ * Calls calculator service to exchange
  * Prints the result
 
 Components:
