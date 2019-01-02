@@ -4,9 +4,10 @@ The example contains 3 microservices and a CLI tool to interact with the service
 The CLI tool "calculates" best gold currency ratio, and exchanges the amount of gold to the given currency. The services are running in minikube by default.
 
 Operations are the following:
- * CLI tool downloads the ratio from two different services parallely
+ * CLI tool downloads the ratio from two different services parallel
  * Finds best price
  * Call calculator service to exchange
+ * Prints the result
 
 Components:
  * Exchange service - simple version
