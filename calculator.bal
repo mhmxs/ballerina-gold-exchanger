@@ -43,7 +43,7 @@ service calculator on new http:Listener(9090) {
 
 function multiply(http:Request request) returns float|error {
     json message = check request.getJsonPayload();
-    log:printInfo(string `Multiply: {{message.toString()}}`);
+    log:printInfo(string `Multiply: {{ message.toString() }}`);
     Request req = check Request.convert(message);
     Operation operation = check Operation.convert(req);
     operation.operand = "*";

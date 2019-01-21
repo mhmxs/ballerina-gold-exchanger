@@ -62,5 +62,5 @@ function multiply(float leftSide, float rightSide) returns string|error {
         return check response.getTextPayload();
     }
     error err = error("Unable to call calculator service");
-    panic(err);
+    return err;
 }

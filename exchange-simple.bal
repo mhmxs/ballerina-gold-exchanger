@@ -28,11 +28,11 @@ service exchangeSimple on new http:Listener(9091) {
 function generateResponse(string|error payload) returns @untainted json {
     return payload is string
         ? { currency: payload, rate: getExchangeRate(payload) }
-        : { "error": string `Invalid currency: {{payload.reason()}}` };
+        : { "error": string `Invalid currency: {{ payload.reason() }}` };
 }
 
 function getExchangeRate(string currency) returns float {
-    log:printInfo(string `Looking for currency {{currency}}`);
+    log:printInfo(string `Looking for currency {{ currency }}`);
     match currency {
         "USD"|"EUR" => return 35.50;
         "GBP" => return 32.00;

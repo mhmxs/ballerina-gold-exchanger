@@ -23,7 +23,7 @@ type Exchanger object {
                 return key == currency;
             })
             .map(function ((string, float) pair) returns float {
-                var (key, value) = pair;
+                var (_, value) = pair;
                 return value;
             });
         if (rates.length() > 0) {
@@ -40,15 +40,15 @@ type Response record {
     string description?; // runtime KeyNotFound !!!
 };
 
-type Handler object {
+type HttpHandler object {
     private Exchanger e = new;
 
     function generateResponse(http:Request request) returns json|error;
 };
 
-function Handler.generateResponse(http:Request request) returns @untainted json|error {
+function HttpHandler.generateResponse(http:Request request) returns @untainted json|error {
     string currency = check request.getTextPayload();
-    log:printInfo(string `Looking for currency {{currency}}`);
+    log:printInfo(string `Looking for currency {{ currency }}`);
     float rate = check self.e.getExchangeRate(currency);
     Response response = { currency: currency, rate: rate };
     json responseMap = check json.convert(response);
@@ -67,7 +67,7 @@ function Handler.generateResponse(http:Request request) returns @untainted json|
     serviceType: "NodePort"
 }
 service exchangeEnterprise on new http:Listener(9092) {
-    private Handler handler = new;
+    private HttpHandler handler = new;
 
     resource function getRate(http:Caller caller, http:Request request) {
         log:printInfo("Request accepted");
@@ -78,7 +78,7 @@ service exchangeEnterprise on new http:Listener(9092) {
             log:printInfo(message.toString());
             response.setJsonPayload(message);
         } else {
-            response.setJsonPayload({ "error": string `Invalid currency: {{message.reason()}}` });
+            response.setJsonPayload({ "error": string `Invalid currency: {{ message.reason() }}` });
         }
         _ = caller -> respond(response);
     }
