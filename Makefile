@@ -5,7 +5,7 @@ init:
 	minikube addons enable ingress
 
 build:
-	$(info Do not forget to execute 'eval $$(minikube docker-env)' before building project)
+	$(shell eval $(minikube docker-env))
 	ballerina build
 
 kube-apply:
