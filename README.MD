@@ -21,4 +21,4 @@ Components:
   * make build - Build project, Docker and Kubernetes resources
   * make kube-apply - Apply service descriptors on Minikube
   * make expose - Expose services to localhost
-  * ballerina run convert.bal 3 USD
+  * ballerina run convert.bal 4 USD
